@@ -1,0 +1,53 @@
+{
+  "id": 1,
+  "name": "Morning Yoga Flow",
+  "description": "Start your day with this energizing yoga sequence",
+  "image": "assets/images/yoga_detail.jpg",
+  "duration": "25 min",
+  "calories": 180,
+  "difficulty": "Beginner",
+  "steps": [
+    {
+      "id": 1,
+      "title": "Mountain Pose",
+      "duration": "1 min",
+      "description": "Stand tall with feet together and arms at your sides"
+    },
+    {
+      "id": 2,
+      "title": "Forward Fold",
+      "duration": "1 min",
+      "description": "Bend forward from hips, letting arms hang naturally"
+    },
+    {
+      "id": 3,
+      "title": "Plank Pose",
+      "duration": "2 min",
+      "description": "Hold plank position with body in straight line"
+    },
+    {
+      "id": 4,
+      "title": "Downward Dog",
+      "duration": "2 min",
+      "description": "Form an inverted V shape with your body"
+    },
+    {
+      "id": 5,
+      "title": "Warrior I",
+      "duration": "1 min each side",
+      "description": "Step one foot back and raise arms overhead"
+    },
+    {
+      "id": 6,
+      "title": "Tree Pose",
+      "duration": "1 min each side",
+      "description": "Balance on one foot with other foot on inner thigh"
+    },
+    {
+      "id": 7,
+      "title": "Child's Pose",
+      "duration": "2 min",
+      "description": "Kneel with knees wide and sit back on heels"
+    }
+  ]
+}

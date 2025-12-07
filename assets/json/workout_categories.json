@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Yoga",
+    "description": "Improve flexibility and mindfulness",
+    "image": "assets/images/yoga.jpg",
+    "color": "#FF6B6B"
+  },
+  {
+    "id": 2,
+    "name": "Cardio",
+    "description": "Boost your heart health",
+    "image": "assets/images/cardio.jpg",
+    "color": "#4ECDC4"
+  },
+  {
+    "id": 3,
+    "name": "Strength",
+    "description": "Build muscle and endurance",
+    "image": "assets/images/strength.jpg",
+    "color": "#45B7D1"
+  },
+  {
+    "id": 4,
+    "name": "HIIT",
+    "description": "High-intensity interval training",
+    "image": "assets/images/hiit.jpg",
+    "color": "#FFBE0B"
+  },
+  {
+    "id": 5,
+    "name": "Stretching",
+    "description": "Enhance flexibility and recovery",
+    "image": "assets/images/stretching.jpg",
+    "color": "#FB5607"
+  },
+  {
+    "id": 6,
+    "name": "Meditation",
+    "description": "Relax and reduce stress",
+    "image": "assets/images/meditation.jpg",
+    "color": "#8338EC"
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "user": {
+    "name": "James",
+    "profilePicture": "assets/images/profile.jpg"
+  },
+  "progress": {
+    "percentage": 75,
+    "title": "Weekly Goal"
+  },
+  "weight": {
+    "current": 75.5,
+    "unit": "kg",
+    "change": -2.3
+  },
+  "calories": {
+    "consumed": 1850,
+    "burned": 350,
+    "goal": 2200
+  },
+  "meals": [
+    {
+      "id": 1,
+      "name": "Breakfast",
+      "items": [
+        {
+          "id": 1,
+          "name": "Oatmeal",
+          "calories": 150
+        },
+        {
+          "id": 2,
+          "name": "Banana",
+          "calories": 90
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Lunch",
+      "items": [
+        {
+          "id": 3,
+          "name": "Grilled Chicken Salad",
+          "calories": 320
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Dinner",
+      "items": []
+    },
+    {
+      "id": 4,
+      "name": "Snacks",
+      "items": []
+    }
+  ],
+  "nutritionItems": [
+    {
+      "id": 1,
+      "name": "Water",
+      "value": "8 glasses",
+      "icon": "water"
+    },
+    {
+      "id": 2,
+      "name": "Steps",
+      "value": "7,890",
+      "icon": "steps"
+    },
+    {
+      "id": 3,
+      "name": "Sleep",
+      "value": "7h 30m",
+      "icon": "sleep"
+    },
+    {
+      "id": 4,
+      "name": "Heart Rate",
+      "value": "72 bpm",
+      "icon": "heart"
+    }
+  ]
+}
