@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../providers/workout_provider.dart';
 import '../providers/app_provider.dart';
+import '../providers/profile_provider.dart'; // Add profile provider
 import '../models/home_data.dart';
 import '../utils/constants.dart';
 import 'workout_categories_screen.dart';
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
     final workoutProvider = Provider.of<WorkoutProvider>(context);
+    final profileProvider = Provider.of<ProfileProvider>(context); // Get profile data
     final homeData = workoutProvider.homeData;
 
     return Scaffold(
@@ -62,17 +64,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildGreeting(homeData.user),
+                    _buildGreeting(profileProvider), // Use profile data
                     const SizedBox(height: AppDimensions.paddingMedium),
                     _buildProgressCard(homeData.progress),
                     const SizedBox(height: AppDimensions.paddingMedium),
-                    _buildWeightCaloriesRow(homeData.weight, homeData.calories),
+                    _buildWeightCaloriesRow(homeData.weight, homeData.calories, profileProvider), // Pass profile data
                     const SizedBox(height: AppDimensions.paddingMedium),
                     _buildChartSection(),
                     const SizedBox(height: AppDimensions.paddingMedium),
                     _buildMealsSection(homeData.meals),
                     const SizedBox(height: AppDimensions.paddingMedium),
                     _buildNutritionGrid(homeData.nutritionItems),
+                    const SizedBox(height: AppDimensions.paddingMedium),
+                    _buildUserProfileSummary(profileProvider), // Add user profile summary
                   ],
                 ),
               ),
@@ -90,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildGreeting(User user) {
+  Widget _buildGreeting(ProfileProvider profileProvider) {
     return Row(
       children: [
         CircleAvatar(
@@ -114,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Text(
-              user.name,
+              profileProvider.name.isNotEmpty ? profileProvider.name : 'User', // Use name from profile provider
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -194,13 +198,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildWeightCaloriesRow(Weight weight, Calories calories) {
+  Widget _buildWeightCaloriesRow(Weight weight, Calories calories, ProfileProvider profileProvider) {
     return Row(
       children: [
         Expanded(
           child: _buildStatCard(
             'Weight',
-            '${weight.current} ${weight.unit}',
+            profileProvider.weight != null 
+                ? '${profileProvider.weight?.toStringAsFixed(1)} ${weight.unit}' 
+                : '${weight.current} ${weight.unit}', // Use profile weight if available
             weight.change > 0 ? '+${weight.change}' : '${weight.change}',
             weight.change > 0 ? Colors.red : Colors.green,
           ),
@@ -479,5 +485,75 @@ class _HomeScreenState extends State<HomeScreen> {
       default:
         return Icons.info;
     }
+  }
+
+  // Update the profile summary section to handle empty data
+  Widget _buildUserProfileSummary(ProfileProvider profileProvider) {
+    return Card(
+      elevation: AppDimensions.cardElevation,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusMedium),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.paddingMedium),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Your Profile',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: AppDimensions.paddingSmall),
+            _buildProfileDataRow('Fitness Goal', 
+                profileProvider.fitnessGoal?.isNotEmpty == true 
+                    ? profileProvider.fitnessGoal! 
+                    : 'Not set'),
+            const Divider(),
+            _buildProfileDataRow('Activity Level', 
+                profileProvider.activityLevel?.isNotEmpty == true 
+                    ? profileProvider.activityLevel! 
+                    : 'Not set'),
+            const Divider(),
+            _buildProfileDataRow('Training Days', 
+                profileProvider.trainingDays != null 
+                    ? '${profileProvider.trainingDays} days/week' 
+                    : 'Not set'),
+            const Divider(),
+            _buildProfileDataRow('Preferred Workout', 
+                profileProvider.preferredWorkoutType?.isNotEmpty == true 
+                    ? profileProvider.preferredWorkoutType! 
+                    : 'Not set'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileDataRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

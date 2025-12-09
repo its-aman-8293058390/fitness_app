@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../providers/profile_provider.dart'; // Add profile provider
+import '../screens/edit_profile_screen.dart';
 import '../utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -14,6 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
+    final profileProvider = Provider.of<ProfileProvider>(context); // Get profile data
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildProfileHeader(),
+              _buildProfileHeader(profileProvider), // Pass profile data
               const SizedBox(height: AppDimensions.paddingMedium),
               _buildStatsSection(),
               const SizedBox(height: AppDimensions.paddingMedium),
@@ -45,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildProfileHeader() {
+  Widget _buildProfileHeader(ProfileProvider profileProvider) {
     return Center(
       child: Column(
         children: [
@@ -59,9 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'James Wilson',
-            style: TextStyle(
+          Text(
+            profileProvider.name.isNotEmpty ? profileProvider.name : 'No Name Set', // Use name from provider
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -76,7 +79,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Navigate to edit profile screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EditProfileScreen()),
+              );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,

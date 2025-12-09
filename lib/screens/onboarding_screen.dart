@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/workout_provider.dart';
 import '../providers/app_provider.dart';
-// Remove the login screen import
-import 'home_screen.dart'; // Import home screen directly
+import 'create_profile_screen.dart'; // Import create profile screen
 import '../models/workout.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -133,11 +132,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ElevatedButton(
             onPressed: () {
               if (_currentPage == pageCount - 1) {
-                // Last page - navigate to home screen directly
+                // Last page - navigate to create profile screen
                 Provider.of<AppProvider>(context, listen: false).completeOnboarding();
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const CreateProfileScreen()),
                 );
               } else {
                 _pageController.nextPage(
