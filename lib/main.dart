@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_provider.dart';
 import 'providers/workout_provider.dart';
-import 'providers/profile_provider.dart'; // Add this import
+import 'providers/profile_provider.dart';
+import 'providers/privacy_provider.dart';
+import 'providers/notification_provider.dart'; // Add notification provider
 import 'screens/splash_screen.dart';
 import 'utils/constants.dart';
 
@@ -12,7 +14,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => WorkoutProvider()),
-        ChangeNotifierProvider(create: (_) => ProfileProvider()), // Add this provider
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => PrivacyProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()), // Add notification provider
       ],
       child: const MyApp(),
     ),

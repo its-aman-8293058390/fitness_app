@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
-import '../providers/profile_provider.dart'; // Add profile provider
+import '../providers/profile_provider.dart';
 import '../screens/edit_profile_screen.dart';
+import '../screens/privacy_settings_screen.dart';
+import '../screens/notification_settings_screen.dart'; // Add notification settings screen
 import '../utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -16,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
-    final profileProvider = Provider.of<ProfileProvider>(context); // Get profile data
+    final profileProvider = Provider.of<ProfileProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildProfileHeader(profileProvider), // Pass profile data
+              _buildProfileHeader(profileProvider),
               const SizedBox(height: AppDimensions.paddingMedium),
               _buildStatsSection(),
               const SizedBox(height: AppDimensions.paddingMedium),
@@ -63,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            profileProvider.name.isNotEmpty ? profileProvider.name : 'No Name Set', // Use name from provider
+            profileProvider.name.isNotEmpty ? profileProvider.name : 'No Name Set',
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -80,7 +82,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              // Navigate to edit profile screen
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const EditProfileScreen()),
@@ -183,13 +184,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: Icons.notifications,
                 title: 'Notifications',
                 subtitle: 'Manage your notification preferences',
-                onTap: () {},
+                onTap: () {
+                  // Navigate to notification settings screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const NotificationSettingsScreen()),
+                  );
+                },
               ),
               _buildSettingTile(
                 icon: Icons.lock,
                 title: 'Privacy',
                 subtitle: 'Control your privacy settings',
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const PrivacySettingsScreen()),
+                  );
+                },
               ),
               _buildSettingTile(
                 icon: Icons.help,
